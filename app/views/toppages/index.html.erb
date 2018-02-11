@@ -1,5 +1,12 @@
 <% if logged_in? %>
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <div class="row">
+    <div class="col-md-4">
+      <%= render 'tasks/form', task: @task %>
+    </div>
+    <div class="col-xs-8">
+      <%= render 'tasks/tasks', tasks: @tasks %>
+    </div>
+  </div>
 <% else %>
   <div class="center jumboton">
     <div class="text-center">
