@@ -1,18 +1,7 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:update, :destroy]
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
-  
-  def index
-    @tasks = Task.all.page(params[:page])
-  end
-  
-  def show
-  end
-  
-  def new
-    @task = Task.new
-  end
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy]
   
   def create
     @task = current_user.tasks.build(task_params)
@@ -32,7 +21,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       flash[:success] = 'task は正常に更新されました'
-      redirect_to @task
+      redirect_to root_url
     else
       flash.now[:danger] = 'task は更新されませんでした'
       render :edit
